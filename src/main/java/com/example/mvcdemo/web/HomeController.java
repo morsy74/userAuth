@@ -11,4 +11,8 @@ public class HomeController {
     return "index";
   }
 
+  @GetMapping("/general")
+  public String general() {
+    return "user/general";
+  }
 }

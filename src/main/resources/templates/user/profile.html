@@ -9,11 +9,11 @@
   <title>Profile</title>
 </head>
 
-<body>
+<body action="#" th:action="@{/profile}" th:method="get">
   <nav class="navbar bg-body-tertiary ">
     <a class="navbar-brand" href="#">Customers Management System</a>
     <div class="container-fluid justify-content-end">
-      <a th:href="{index}" class="btn btn-outline-danger" type="submit">Log Out</a>
+      <a th:href="@{/}" class="btn btn-outline-danger" type="submit">Log Out</a>
     </div>
   </nav>
   <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

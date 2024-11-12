@@ -10,12 +10,16 @@ import com.example.mvcdemo.service.UserService;
 
 @Controller
 public class UserController {
-   private final UserService userService;
+  private final UserService userService;
 
-   public UserController(UserService userService) {
-      this.userService = userService;
-   }
+  public UserController(UserService userService) {
+    this.userService = userService;
+  }
 
+  @GetMapping("/profile")
+  public String profile() {
+    return "user/profile";
+  }
   @GetMapping("/login")
   public String login() {
     return "user/login";
@@ -25,10 +29,15 @@ public class UserController {
   public String loginPost(
       @RequestParam("username") String username,
       @RequestParam("password") String password) {
-      
-    return "/general";
+    boolean isAuthenticated = userService.loginUser(username, password);
+    if (isAuthenticated) {
+      System.out.println("Login: " +isAuthenticated);
+      return "user/general";
+    } else {
+      System.out.println("Login: " +isAuthenticated);
+      return "user/login";
+    }
   }
-  
 
   @GetMapping("/signup")
   public String signup() {
@@ -37,12 +46,12 @@ public class UserController {
 
   @PostMapping("/signup")
   public String signupPost(
-    @RequestParam("username") String username,
-    @RequestParam("password") String password) {
-      User user = new User();
-      user.setUsername(username);
-      user.setPassword(password);
-      userService.addUser(user);
-    return "/general";
+      @RequestParam("username") String username,
+      @RequestParam("password") String password) {
+    User user = new User();
+    user.setUsername(username);
+    user.setPassword(password);
+    userService.addUser(user);
+    return "user/general";
   }
 }

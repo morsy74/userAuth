@@ -1,9 +1,10 @@
 package com.example.mvcdemo.service;
 
 import java.util.List;
-import java.util.Optional;
 
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class UserService {
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
     
+    
   }
 
   public void addUser(User user) {
@@ -37,8 +39,16 @@ public class UserService {
     userRepository.save(user);
   }
 
-  public Optional<User> findUserByUsername(String username) {
-    return userRepository.findByUsername(username);
-}
+  // public Optional<User> findUserByUsername(String username) {
+  //   return userRepository.findByUsername(username);
+  // }
+
+  public boolean  loginUser(String username, String password) {
+  
+  Optional<User> optionalUser = userRepository.findByUsername(username);
+  User user = optionalUser.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    
+    return passwordEncoder.matches(password, user.getPassword());
+  }
   
 }
