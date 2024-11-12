@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/css/my-style.css}">
+  <title>Add Customer</title>
+</head>
+<body>
+  <div class="container">
+    <div class="d-grid gap-2 col-7 mx-auto">
+      <h1>Customers Management System</h1>
+    <hr>
+    <h2>Add Customer</h2>
+
+    <form  action="#" th:action="@{/add-customer}"  th:object="${customer}" th:method="post">
+      <input type="text" th:field="*{name}" placeholder="Employee Name" class="form-control mb-4 col-4" id="validationCustom01" value="Mark" required>
+      <div class="invalid-feedback">Please Enter Name</div>
+      <input type="text" th:field="*{email}" placeholder="Employee Email" class="form-control mb-4 col-4" id="validationCustom01" value="Mark" required>
+      <div class="invalid-feedback">Please Enter Email</div>
+      <input type="text" th:field="*{phone}" placeholder="Employee Phone" class="form-control mb-4 col-4" id="validationCustom01" value="Mark" required>
+      <div class="invalid-feedback">Please Enter Phone</div>
+      <button type="submit" class="btn btn-success col-3"> Add Customer</button>
+    </form>
+    <hr>
+    </div>
+    
+    <div class="d-grid gap-2 col-4 mx-auto">
+      <a th:href="@{customer-list}" class="btn btn-secondary">Back to Home</a>
+    </div>
+    
+</div>
+  <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
